@@ -10,7 +10,6 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-// Connect to MongoDB
 mongoose.connect(process.env.MONGO_URI)
   .then(() => console.log("MongoDB Connected..."))
   .catch(err => console.log(err));
@@ -18,14 +17,14 @@ mongoose.connect(process.env.MONGO_URI)
 // Routes
 app.use('/api/transactions', require('./routes/transactions'));
 
-// Basic login route for testing
+
 app.post('/api/login', (req, res) => {
   const { userId, password } = req.body;
   
-  // Debugging: This will print in your terminal/command prompt
+  
   console.log("Login attempt received:", userId, password);
 
-  // Note: These are case-sensitive and must be exactly 'adm' or 'user'
+ 
   if (userId === 'adm' && password === 'adm') {
     console.log("Admin login success");
     return res.json({ role: 'admin' });
